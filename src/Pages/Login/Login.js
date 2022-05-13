@@ -50,14 +50,35 @@ const Login = () => {
 
                             </label>
                         </div>
+                        <div class="form-control w-full max-w-xs">
+                            <label class="label">
+                                <span class="label-text">Password</span>
 
-                        <input />
-                        {errors.firstName?.type === 'required' && "First name is required"}
+                            </label>
+                            <input
+                                type="password"
+                                placeholder="password"
+                                class="input input-bordered w-full max-w-xs"
+                                {...register("password", {
+                                    required: {
+                                        value: true,
+                                        message: "password is required"
+                                    },
+                                    minLength: {
+                                        value: 6,
+                                        message: 'Must be 6 character or longer'
+                                    }
+                                })}
+                            />
+                            <label class="label">
+                                {errors.password?.type === 'required' && <span class="label-text-alt text-red-500">{errors.password.message}</span>}
+                                {errors.password?.type === 'minLength' && <span class="label-text-alt text-red-500">{errors.password.message}</span>}
 
-                        <input {...register("lastName", { required: true })} />
-                        {errors.lastName && "Last name is required"}
 
-                        <input type="submit" />
+                            </label>
+                        </div>
+
+                        <input className='btn w-full max-w-xs text-white' type="submit" value="Login" />
                     </form>
                     <div className="divider" > OR</div >
                     <button
