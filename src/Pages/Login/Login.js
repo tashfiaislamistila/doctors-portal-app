@@ -25,17 +25,27 @@ const Login = () => {
 
                         <div class="form-control w-full max-w-xs">
                             <label class="label">
-                                <span class="label-text">What is your name?</span>
+                                <span class="label-text">Email</span>
 
                             </label>
-                            <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+                            <input
+                                type="email"
+                                placeholder="Your Email"
+                                class="input input-bordered w-full max-w-xs"
+                                {...register("email", {
+                                    pattern: {
+                                        value: /[A-Za-z]{3}/,
+                                        message: 'error message'
+                                    }
+                                })}
+                            />
                             <label class="label">
                                 <span class="label-text-alt">Alt label</span>
 
                             </label>
                         </div>
 
-                        <input {...register("firstName", { required: true })} />
+                        <input />
                         {errors.firstName?.type === 'required' && "First name is required"}
 
                         <input {...register("lastName", { required: true })} />
