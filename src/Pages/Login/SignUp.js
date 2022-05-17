@@ -48,10 +48,8 @@ const SignUp = () => {
             <div className="card w-96 bg-base-100 shadow-xl">
                 <div className="card-body">
                     <h2 className="text-center text-2xl font-bold">Sign Up</h2>
+
                     <form onSubmit={handleSubmit(onSubmit)}>
-
-
-
                         <div className="form-control w-full max-w-xs">
                             <label className="label">
                                 <span className="label-text">Name</span>
@@ -97,7 +95,6 @@ const SignUp = () => {
                                 {errors.email?.type === 'pattern' && <span className="label-text-alt text-red-500">{errors.email.message}</span>}
                             </label>
                         </div>
-
                         <div className="form-control w-full max-w-xs">
                             <label className="label">
                                 <span className="label-text">Password</span>
@@ -125,6 +122,7 @@ const SignUp = () => {
                         {signInError}
                         <input className='btn w-full max-w-xs text-white' type="submit" value="Sign Up" />
                     </form>
+
                     <p><small>Already have an account? <Link className='text-primary' to="/login">Please Login </Link></small></p>
                     <div className="divider" > OR</div >
                     <button
