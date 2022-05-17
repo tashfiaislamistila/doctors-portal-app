@@ -9,8 +9,39 @@ const AddDoctor = () => {
 
     const { data: services, isLoading } = useQuery('services', () => fetch('http://localhost:5000/service').then(res => res.json()))
 
+    const imageStorageKey = '1097fd383e840edafee035d5c1d37157';
+
+    /**
+     * 3 ways to store images
+     * 1> Third party storage // free open public storage is ok for practice project
+     * 2> Your own storage in your own server (file system)
+     * 3> Database:  Mongodb
+     * 
+     * YUP: to validate file:Search => Yup file validation for react hook form
+     * 
+     * */
+
     const onSubmit = async data => {
-        console.log('data', data);
+        const image = data.image[0];
+        const formData = new FormData();
+        formData.append('image', image);
+        const url = `https://api.imgbb.com/1/upload?key=${imageStorageKey}`;
+        fetch(url, {
+            method: 'POST',
+            body: formData
+        })
+            .then(res => res.json())
+            .then(result => {
+                if (result.success) {
+                    const img = result.data.url;
+                    const doctor = {
+                        name: data.name,
+                        email: data.email,
+                        specialty: data.specialty;
+                    }
+                }
+                console.log('imgbb', result);
+            })
     }
 
     if (isLoading) {
@@ -22,6 +53,7 @@ const AddDoctor = () => {
             <h2 className='text-2xl'>Add a New Doctor</h2>
 
             <form onSubmit={handleSubmit(onSubmit)}>
+
                 <div className="form-control w-full max-w-xs">
                     <label className="label">
                         <span className="label-text">Name</span>
@@ -39,9 +71,9 @@ const AddDoctor = () => {
                     />
                     <label className="label">
                         {errors.name?.type === 'required' && <span className="label-text-alt text-red-500">{errors.name.message}</span>}
-
                     </label>
                 </div>
+
                 <div className="form-control w-full max-w-xs">
                     <label className="label">
                         <span className="label-text">Email</span>
@@ -66,11 +98,13 @@ const AddDoctor = () => {
                         {errors.email?.type === 'pattern' && <span className="label-text-alt text-red-500">{errors.email.message}</span>}
                     </label>
                 </div>
+
+
                 <div className="form-control w-full max-w-xs">
                     <label className="label">
                         <span className="label-text">Specialty</span>
                     </label>
-                    <select {...register('specialty')} class="select w-full max-w-xs">
+                    <select {...register('specialty')} class="select input-bordered w-full max-w-xs">
                         {
                             services.map(service => <option
                                 key={service._id}
@@ -79,6 +113,26 @@ const AddDoctor = () => {
                         }
                     </select>
                 </div>
+
+                <div className="form-control w-full max-w-xs">
+                    <label className="label">
+                        <span className="label-text">Photo</span>
+                    </label>
+                    <input
+                        type="file"
+                        className="input input-bordered w-full max-w-xs"
+                        {...register("image", {
+                            required: {
+                                value: true,
+                                message: "Image is required"
+                            }
+                        })}
+                    />
+                    <label className="label">
+                        {errors.name?.type === 'required' && <span className="label-text-alt text-red-500">{errors.name.message}</span>}
+                    </label>
+                </div>
+
                 <input className='btn w-full max-w-xs text-white' type="submit" value="Add" />
             </form>
         </div>
