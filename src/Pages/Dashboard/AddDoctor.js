@@ -37,10 +37,13 @@ const AddDoctor = () => {
                     const doctor = {
                         name: data.name,
                         email: data.email,
-                        specialty: data.specialty;
+                        specialty: data.specialty,
+                        img: img
                     }
+                    //send to your database
+
                 }
-                console.log('imgbb', result);
+
             })
     }
 
