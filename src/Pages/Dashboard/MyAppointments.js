@@ -62,21 +62,6 @@ const MyAppointments = () => {
                                 </td>
                             </tr>)
                         }
-                        {/* 
-
-                        <tr>
-                            <th>2</th>
-                            <td>Hart Hagerty</td>
-                            <td>Desktop Support Technician</td>
-                            <td>Purple</td>
-                        </tr>
-
-                        <tr>
-                            <th>3</th>
-                            <td>Brice Swyre</td>
-                            <td>Tax Accountant</td>
-                            <td>Red</td>
-                        </tr> */}
                     </tbody>
                 </table>
             </div>

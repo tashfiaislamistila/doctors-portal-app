@@ -11,7 +11,7 @@ const stripePromise = loadStripe('pk_test_51L0xX5CQ1vBM2PUYBjELFcifPOEbl8yCzAGls
 
 const Payment = () => {
     const { id } = useParams();
-    const url = `http://localhost:5000/booking/${id}`;
+    const url = `https://fierce-coast-59035.herokuapp.com/booking/${id}`;
 
     const { data: appointment, isLoading } = useQuery(['booking', id], () => fetch(url, {
         method: 'GET',
